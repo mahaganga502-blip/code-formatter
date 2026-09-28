@@ -1,0 +1,41 @@
+# Simple Code Formatter
+def format_code(code):
+    lines = code.split("\n")
+    formatted_lines = []
+    indent = 0
+    for line in lines:
+        line = line.strip()
+        if line == "":
+            continue
+        # Reduce indentation after closing braces
+        if line.startswith("}"):
+            indent -= 1
+        formatted_line = "    " * max(indent, 0) + line
+        formatted_lines.append(formatted_line)
+        # Increase indentation after opening braces
+        if line.endswith("{"):
+            indent += 1
+    return "\n".join(formatted_lines)
+print("===== SIMPLE CODE FORMATTER =====")
+print("Enter code (type END on a new line):")
+code_lines = []
+while True:
+    line = input()
+    if line == "END":
+        break
+    code_lines.append(line)
+code = "\n".join(code_lines)
+print("\n===== FORMATTED CODE =====")
+print(format_code(code))
+
+
+OUTPUT:
+===== SIMPLE CODE FORMATTER =====
+Enter code (type END on a new line):
+===== FORMATTED CODE =====
+if(x>10){
+    print("Hello");
+    if(y>5){
+        print("Welcome");
+    }
+}
